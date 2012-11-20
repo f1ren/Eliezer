@@ -1,0 +1,26 @@
+Desgin:
+	Student (db.Model):
+		Methods:
+			login(uname, passwd, id):
+				raise InvalidLoggin
+				return loginData
+			getExamsHah(loginData):
+				raise Expired
+				return hash
+		Properties:
+			Email
+			LoginData
+			lastExamsHash
+
+Flow:
+	Register
+	Validate email
+	Attempt login
+		On failure
+			Just notify
+		On success
+			Store hash and loginData
+			Notify
+
+	Every once in a while, check hash
+	BAM!

@@ -1,0 +1,5 @@
+cron:
+- description: Check exams change
+  url: /checkExams
+  schedule: every 60 minutes from 07:00 to 22:00
+  timezone: Israel
