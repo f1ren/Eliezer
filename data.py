@@ -2,17 +2,12 @@
 
 from google.appengine.ext import db
 
-class Student(db.Model):
-    """Models a student with user name, ID and a password"""
-    username = db.StringProperty()
-    id_num = db.StringProperty()
-    password = db.StringProperty()
-    lastHTMLHash = db.IntegerProperty()
-    email = db.StringProperty()
-    email_approved = db.BooleanProperty()
-    email_approval_code = db.StringProperty()
-
-class HTML(db.Model):
-    """Models a student with user name, ID and a password"""
-    filename = db.StringProperty()
+class SharedPage(db.Model):
+    """
+    Login pages that are shared to all students
+    Practically it's:
+        1. The form of user, password and id
+        2. The I agree screen
+    """
+    pageName = db.StringProperty()
     hashVal = db.IntegerProperty()

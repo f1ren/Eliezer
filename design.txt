@@ -1,16 +1,23 @@
 Desgin:
 	Student (db.Model):
 		Methods:
+			c'tor(uname)
 			login(uname, passwd, id):
 				raise InvalidLoggin
 				return loginData
-			getExamsHah(loginData):
-				raise Expired
-				return hash
+			_getExams(loginData):
+				raise LoginExpired
+			examsHashChanged(loginData):
+				raise LoginExpired
+				return True/False
 		Properties:
 			Email
 			LoginData
 			lastExamsHash
+	Exams (html):
+		Methods:
+			c'tor(html)
+			getHash()
 
 Flow:
 	Register
@@ -21,6 +28,7 @@ Flow:
 		On success
 			Store hash and loginData
 			Notify
+			Update hash
 
 	Every once in a while, check hash
 	BAM!
