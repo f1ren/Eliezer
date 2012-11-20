@@ -25,7 +25,7 @@ import string
 from google.appengine.api import mail
 from datetime import datetime
 
-#TODO load CHANGE_NOTIFICATION from file
+#TODO load CHANGE_NOTIFICATION from file (template?)
 CHANGE_NOTIFICATION = ["""There is some change in your exams on gezer.<br>
 <a href=https://gezer1.bgu.ac.il/meser/entrance.php?uname=%s&passwd=%s&id=%s>Open my gezer</a><br><br><br><br><br>
 <font size=1><a href=%s/pages/unregistration.htm>unregister from Eliezer</a></font>""", """There is some change in your exams on gezer.
@@ -117,8 +117,6 @@ class RegisterHandler(webapp2.RequestHandler):
         email_approval_code = ''.join(random.choice(string.ascii_lowercase + string.digits) for x in range(10))
         newStudent = Student()
         newStudent.username = self.request.get('username')
-        newStudent.id_num = self.request.get('id_num')
-        newStudent.password = self.request.get('password')
         newStudent.email = self.request.get('email')
         newStudent.email_approved = False
         newStudent.email_approval_code = email_approval_code
