@@ -4,6 +4,7 @@ import mechanize
 from utils import *
 from Exceptions import *
 from Exams import Exams
+from DbGezer import *
 
 LOGIN_URL = "https://gezer1.bgu.ac.il/teva/scomp.php"
 
@@ -14,7 +15,7 @@ class Gezer(object):
     _exams = None
     _loginRequest = None
 
-    def __init__(self, pageHashesCheckFunc):
+    def __init__(self, pageHashesCheckFunc = checkPagesHash):
         self.pageHashesCheckFunc = pageHashesCheckFunc
 
     def login(self, uname, passwd, id_num):
@@ -52,8 +53,12 @@ class Gezer(object):
         req = strToRequest(loginRequest)
         examsTable = mechanize.urlopen(req)
 
-        # TODO raise exception on expired
-        self._exams = Exams(examsTable.read())
+        examsHtml = examsTable.read()
+
+        if len(examsHtml) <= 600:
+            raise LoginExpiredException()
+
+        self._exams = Exams(examsHtml)
         self._loginRequest = loginRequest
 
     def getLastExams(self):
