@@ -69,8 +69,10 @@ class RegisterHandler(webapp2.RequestHandler):
             self.response.out.write(e.message)
             return
 
-        self.response.out.write("A confirmation mail will be sent to you shortly.<br>")
-        self.response.out.write("Please confirm your email address.<br>")
+        self.response.out.write(
+                "A confirmation mail will be sent to you shortly.<br>")
+        self.response.out.write(
+                "Please confirm your email address.<br>")
 
 class ApprovalHandler(webapp2.RequestHandler):
     def get(self):
@@ -83,12 +85,14 @@ class ApprovalHandler(webapp2.RequestHandler):
             if student.email_approval_code == approval_code:
                 student.email_approved = True
                 student.put()
-                self.response.out.write("Ok, all done. You will receieve notifications about future changes in your exams.")
+                self.response.out.write("Ok, all done.<br>"
+                    "You will be notified about changes in your exams.")
                 logging.info("address %s confirmed" % email)
 
 app = webapp2.WSGIApplication([('/', MainHandler),
                                ('/checkExams', CheckExamsHandler),
                                ('/unregister', UnregisterHandler),
                                ('/register', RegisterHandler),
-                               ('/approve', ApprovalHandler)],
+                               ('/approve', ApprovalHandler),
+                               ],
                               debug=True)

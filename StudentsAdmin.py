@@ -96,7 +96,6 @@ class StudentsAdmin(object):
                                 "FROM Student "
                                 "WHERE email_approved = True")
         for student in students:
-            logging.debug(student.username)
             try:
                 self.gezer.updateExams(student.loginRequest)
                 newHash = self.gezer.getLastExams().getHash()
